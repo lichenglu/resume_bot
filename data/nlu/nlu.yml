@@ -1,0 +1,158 @@
+version: "3.0"
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+    - how are you?
+    - how are you, friend!
+    - what's up
+    - sup
+    - yo
+    - are you there
+- intent: self_introduction
+  examples: |
+    - Hi, my name is [amanda](name)
+    - I am [robert](name)
+    - I am [Chenglu](name). What is yours
+    - You can call me [hanxiang](name). What is yours
+    - Great to see you! I am [zk](name)
+    - Call me [john](name)
+    - It is [jack](name)
+    - It's [Chenglu](name)
+    - im [Chenglu](name)
+    - i am [cl](name)
+    - My name is [Chenglu](name)
+- intent: help_seeking
+  examples: |
+    - I need help!
+    - I need helppppp!
+    - Help me pleaseeeee!
+    - Help me please!
+    - Help!
+    - helpppppppp
+    - are your thereeeeeee
+    - are your there
+- intent: help_seeking_problem_solving
+  examples: |
+    - Can you [solve](help_seeking_mode) [$3x+2x$]{"entity": "equation", "value": "3x+2x"} for me
+    - Can you [simplify](help_seeking_mode) [$9+6*6/5+61+5649$]{"entity": "equation", "value": "9+6*6/5+61+5649"} for me
+    - Do you [know the answer]{"entity": "help_seeking_mode", "value": "solve"} of [$6x+7-92343x=79+96x$]{"entity": "equation", "value": "6x+7-92343x=79+96x"}
+    - Can you [help me answer]{"entity": "help_seeking_mode", "value": "solve"} [$-2.3=1.5g-0.9$]{"entity": "equation", "value": "-2.3=1.5g-0.9"}
+    - Do you know the [final answer]{"entity": "help_seeking_mode", "value": "solve"} of it
+    - Can this [be simplified]{"entity": "help_seeking_mode", "value": "simplify"}
+    - Can you [make this easier]{"entity": "help_seeking_mode", "value": "simplify"}
+    - $[1x+2=3$](equation)
+- intent: help_seeking_recommendation
+  examples: |
+    - Do you have any [recommendations]{"entity": "help_seeking_mode", "value": "recommend"} on this?
+    - Can you [recommend](help_seeking_mode) some materials?
+    - Recommendation?
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+- intent: background
+  examples: |
+    - What is your research interest?
+- synonym: 3x+2x
+  examples: |
+    - $3x+2x$
+- synonym: 9+6*6/5+61+5649
+  examples: |
+    - $9+6*6/5+61+5649$
+- synonym: solve
+  examples: |
+    - know the answer
+    - help me answer
+    - final answer
+- synonym: 6x+7-92343x=79+96x
+  examples: |
+    - $6x+7-92343x=79+96x$
+- synonym: -2.3=1.5g-0.9
+  examples: |
+    - $-2.3=1.5g-0.9$
+- synonym: simplify
+  examples: |
+    - be simplified
+    - make this easier
+- synonym: recommend
+  examples: |
+    - recommendations
+- regex: equation
+  examples: |
+    - .*?\$(.*)\$.*

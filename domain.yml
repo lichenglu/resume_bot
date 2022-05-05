@@ -1,0 +1,117 @@
+version: '3.0'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- self_introduction
+- help_seeking_problem_solving
+- help_seeking
+- deny
+- greet
+- background:
+    is_retrieval_intent: true
+- out_of_scope
+- help_seeking_recommendation
+- help_seeking_problem_solving_start
+- goodbye
+- affirm
+- mood_great
+- mood_unhappy
+- bot_challenge
+entities:
+- equation
+- help_seeking_mode
+- name
+- retrieval_intent
+slots:
+  name:
+    type: text
+    initial_value: stranger
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: name
+  equation:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      entity: equation
+  help_seeking_mode:
+    type: categorical
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: help_seeking_mode
+    values:
+    - solve
+    - simplify
+    - recommend
+responses:
+  utter_greet:
+  - text: Hey! How are you? My name is Smoky, Chenglu's assistant. What is your name?
+  utter_followup:
+  - text: "Nice meeting you, {name}. Do you want to know Chenglu's:"
+    buttons:
+    - payload: Where have you studied?
+      title: Education
+    - payload: What is your research interest?
+      title: Research Interest
+    - payload: What research projects are your working on?
+      title: Research Project
+  utter_background/education:
+  - text: Chenglu is a Ph.D. Candidate in Educational Technology at University of Florida. He is expected to graduate in May 2023. He sets his mind to dedicate his life time in higher institutes as an educational researcher.
+  utter_background/research:
+  - text: Chenglu is interested in using artificial intelligence to build fair, data-driven, and accurate educational systems for students. He has published eight refereed journal articles or conference papers with first-authorship, and seven scholarly works with second-authorship.
+  utter_background/research_project:
+  - text: Chenglu has been working on multimillion projects funded by NSF, IES, Helios Education Foundation, and Schmidt Future Foundation.
+  utter_math_ability:
+  - text: Thanks for showing interests in me! You know what? I can also help with algebra problems!
+    buttons:
+    - payload: /help_seeking
+      title: Okay, I will test you!
+    - payload: /deny
+      title: Nah...I am good
+  utter_help_seeking_start:
+  - text: Glad to help! What can I do for you?
+    buttons:
+    - payload: '/help_seeking_problem_solving{{"help_seeking_mode": "solve"}}'
+      title: Solve an equation!
+    - payload: '/help_seeking_problem_solving{{"help_seeking_mode": "simplify"}}'
+      title: Simplify an equation!
+    - payload: '/help_seeking_recommendation{{"help_seeking_mode": "recommend"}}'
+      title: Recommend some learning resources!
+    - payload: /deny
+      title: Never mind...I changed my mind
+  utter_ask_for_equation:
+  - text: Cool! What is the equation?
+  utter_ask_for_topic:
+  - text: No problem! What do you want to learn more about?
+  utter_deny_response:
+  - text: That's cool! You can always ask later.
+  utter_cheer_up:
+  - text: 'Here is something to cheer you up:'
+    image: https://i.imgur.com/nGF1K8f.jpg
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_goodbye:
+  - text: Bye
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+actions:
+- action_resolve_equation
+- validate_math_form
+- utter_ask_for_equation
+- utter_background
+- utter_deny_response
+- utter_followup
+- utter_greet
+- utter_help_seeking_start
+- utter_math_ability
+forms:
+  math_form:
+    required_slots:
+    - equation
+    - help_seeking_mode

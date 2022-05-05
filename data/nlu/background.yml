@@ -1,0 +1,22 @@
+version: "3.0"
+
+nlu:
+  - intent: background/education
+    examples: |
+      - Where have you studied?
+      - What degree are your pursuing?
+      - What degree do you have?
+      - What is your educational background?
+
+  - intent: background/research
+    examples: |
+      - What is your research interest?
+      - How many papers do you have?
+      - What is your research background?
+  
+  - intent: background/research_project
+    examples: |
+      - What research projects are your working on?
+      - Do you have a project that you want to share?
+      - Highlighted projects
+      - What are you working on?
