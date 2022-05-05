@@ -20,9 +20,13 @@ intents:
 - bot_challenge
 entities:
 - equation
+    influence_conversation: false
 - help_seeking_mode
+    influence_conversation: false
 - name
+    influence_conversation: false
 - retrieval_intent
+    influence_conversation: false
 slots:
   name:
     type: text
