@@ -1,4 +1,4 @@
-version: "3.0"
+version: "3.1"
 nlu:
 - intent: greet
   examples: |
@@ -34,31 +34,6 @@ nlu:
     - im [Chenglu](name)
     - i am [cl](name)
     - My name is [Chenglu](name)
-- intent: help_seeking
-  examples: |
-    - I need help!
-    - I need helppppp!
-    - Help me pleaseeeee!
-    - Help me please!
-    - Help!
-    - helpppppppp
-    - are your thereeeeeee
-    - are your there
-- intent: help_seeking_problem_solving
-  examples: |
-    - Can you [solve](help_seeking_mode) [$3x+2x$]{"entity": "equation", "value": "3x+2x"} for me
-    - Can you [simplify](help_seeking_mode) [$9+6*6/5+61+5649$]{"entity": "equation", "value": "9+6*6/5+61+5649"} for me
-    - Do you [know the answer]{"entity": "help_seeking_mode", "value": "solve"} of [$6x+7-92343x=79+96x$]{"entity": "equation", "value": "6x+7-92343x=79+96x"}
-    - Can you [help me answer]{"entity": "help_seeking_mode", "value": "solve"} [$-2.3=1.5g-0.9$]{"entity": "equation", "value": "-2.3=1.5g-0.9"}
-    - Do you know the [final answer]{"entity": "help_seeking_mode", "value": "solve"} of it
-    - Can this [be simplified]{"entity": "help_seeking_mode", "value": "simplify"}
-    - Can you [make this easier]{"entity": "help_seeking_mode", "value": "simplify"}
-    - $[1x+2=3$](equation)
-- intent: help_seeking_recommendation
-  examples: |
-    - Do you have any [recommendations]{"entity": "help_seeking_mode", "value": "recommend"} on this?
-    - Can you [recommend](help_seeking_mode) some materials?
-    - Recommendation?
 - intent: goodbye
   examples: |
     - cu
@@ -88,44 +63,19 @@ nlu:
     - don't like that
     - no way
     - not really
-- intent: mood_great
-  examples: |
-    - perfect
-    - great
-    - amazing
-    - feeling like a king
-    - wonderful
-    - I am feeling very good
-    - I am great
-    - I am amazing
-    - I am going to save the world
-    - super stoked
-    - extremely good
-    - so so perfect
-    - so good
-    - so perfect
-- intent: mood_unhappy
-  examples: |
-    - my day was horrible
-    - I am sad
-    - I don't feel very well
-    - I am disappointed
-    - super sad
-    - I'm so sad
-    - sad
-    - very sad
-    - unhappy
-    - not good
-    - not very good
-    - extremly sad
-    - so saad
-    - so sad
+    - nah
+    - im good
+    - no, thanks
 - intent: bot_challenge
   examples: |
     - are you a bot?
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
+    - cheater!
+    - did you cheat?
+    - liar
+    - you lied
 - intent: background
   examples: |
     - What is your research interest?

@@ -1,49 +1,67 @@
-version: '3.0'
+version: '3.1'
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
 intents:
-- self_introduction
-- help_seeking_problem_solving
-- help_seeking
-- deny
-- greet
-- background:
-    is_retrieval_intent: true
-- out_of_scope
+- self_introduction:
+    use_entities:
+    - name
+- greet:
+    use_entities:
+    - name
+- help_seeking_problem_solving:
+    use_entities:
+    - help_seeking_mode
 - help_seeking_recommendation
-- help_seeking_problem_solving_start
+- help_seeking:
+    use_entities:
+    - help_seeking_mode
+    - equation
+- deny:
+    use_entities: []
+- gratitude:
+    use_entities: []
+- background:
+    use_entities:
+    - name
+- play_rps:
+    use_entities:
+    - rps_choice
+- inform_rps_choice:
+    use_entities:
+    - rps_choice
+- out_of_scope
 - goodbye
 - affirm
 - mood_great
 - mood_unhappy
 - bot_challenge
+
 entities:
 - equation
-    influence_conversation: false
 - help_seeking_mode
-    influence_conversation: false
 - name
-    influence_conversation: false
 - retrieval_intent
-    influence_conversation: false
+- rps_choice
+
 slots:
   name:
     type: text
     initial_value: stranger
-    influence_conversation: true
+    influence_conversation: false
     mappings:
     - type: from_entity
       entity: name
   equation:
     type: text
-    influence_conversation: true
+    influence_conversation: false
     mappings:
     - type: from_text
       entity: equation
   help_seeking_mode:
     type: categorical
-    influence_conversation: true
+    influence_conversation: false
     mappings:
     - type: from_entity
       entity: help_seeking_mode
@@ -51,18 +69,29 @@ slots:
     - solve
     - simplify
     - recommend
+  rps_choice:
+    type: categorical
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: rps_choice
+    values:
+    - rock
+    - paper
+    - scissors
+
 responses:
   utter_greet:
-  - text: Hey! How are you? My name is Smoky, Chenglu's assistant. What is your name?
+  - text: Hey! Great to see you! My name is Smoky, Chenglu's assistant. What is your name?
   utter_followup:
-  - text: "Nice meeting you, {name}. Do you want to know Chenglu's:"
-    buttons:
+  - buttons:
     - payload: Where have you studied?
       title: Education
     - payload: What is your research interest?
       title: Research Interest
     - payload: What research projects are your working on?
       title: Research Project
+    text: "Nice meeting you, {name}. Do you want to know Chenglu's:"
   utter_background/education:
   - text: Chenglu is a Ph.D. Candidate in Educational Technology at University of Florida. He is expected to graduate in May 2023. He sets his mind to dedicate his life time in higher institutes as an educational researcher.
   utter_background/research:
@@ -70,15 +99,14 @@ responses:
   utter_background/research_project:
   - text: Chenglu has been working on multimillion projects funded by NSF, IES, Helios Education Foundation, and Schmidt Future Foundation.
   utter_math_ability:
-  - text: Thanks for showing interests in me! You know what? I can also help with algebra problems!
-    buttons:
+  - buttons:
     - payload: /help_seeking
       title: Okay, I will test you!
     - payload: /deny
       title: Nah...I am good
+    text: Thanks for showing interests in me! You know what? I can also help with algebra problems!
   utter_help_seeking_start:
-  - text: Glad to help! What can I do for you?
-    buttons:
+  - buttons:
     - payload: '/help_seeking_problem_solving{{"help_seeking_mode": "solve"}}'
       title: Solve an equation!
     - payload: '/help_seeking_problem_solving{{"help_seeking_mode": "simplify"}}'
@@ -87,33 +115,63 @@ responses:
       title: Recommend some learning resources!
     - payload: /deny
       title: Never mind...I changed my mind
-  utter_ask_for_equation:
+    text: Glad to help! What can I do for you?
+  # https://rasa.com/docs/rasa/forms/: Once the form action gets called for the first time, the form gets activated and will prompt the user for the next required slot value. It does this by looking for a response called utter_ask_<form_name>_<slot_name> or utter_ask_<slot_name> if the former isn't found. Make sure to define these responses in your domain file for each required slot.
+  utter_ask_equation:
   - text: Cool! What is the equation?
   utter_ask_for_topic:
   - text: No problem! What do you want to learn more about?
   utter_deny_response:
-  - text: That's cool! You can always ask later.
+  - text: That's cool! I am always here.
+  utter_no_problem:
+  - text: 'You are always welcome'
+  - text: 'Thank you!'
+  - text: 'Glad it worked out well!'
+  - text: 'Any time!'
   utter_cheer_up:
-  - text: 'Here is something to cheer you up:'
-    image: https://i.imgur.com/nGF1K8f.jpg
+  - image: https://i.imgur.com/nGF1K8f.jpg
+    text: 'Here is something to cheer you up:'
+  - image: https://media4.giphy.com/media/tI880EKd2rxq8/giphy.gif?cid=ecf05e47metgcvmjaj135y3xxboz0zvvlhxzfbmnvqkqhgmt&rid=giphy.gif&ct=g
+    text: 'Hey, you got this. Hang in there and you will make it'
+  - image: https://media4.giphy.com/media/xUPGcDUNKnqM0BwNRm/giphy.gif?cid=ecf05e47metgcvmjaj135y3xxboz0zvvlhxzfbmnvqkqhgmt&rid=giphy.gif&ct=g
+    text: 'I know it can be difficult. But I believe in you!'
+  - image: https://media2.giphy.com/media/jPGMVVCDzfQdeaxm2t/giphy.gif?cid=ecf05e47metgcvmjaj135y3xxboz0zvvlhxzfbmnvqkqhgmt&rid=giphy.gif&ct=g
+    text: 'XOXO~Everything will be alright'
+  utter_rps:
+  - buttons:
+    - payload: rock
+      title: Rock
+    - payload: paper
+      title: Paper
+    - payload: scissors
+      title: Scissors
+    - payload: /deny
+      title: Nah
+    text: Maybe this helps. Do you wanna play rock, paper, scissors with me? Make a choice!
+  utter_caring:
+  - text: 'Hello! How are you today?'
+  - text: "Yo, sup!"
+  - text: "Hi there. How are you?"
   utter_did_that_help:
   - text: Did that help you?
   utter_happy:
   - text: Great, carry on!
+  - image: https://media1.giphy.com/media/sNJrIBqpcgIacLn5mO/giphy.gif?cid=ecf05e47uy5osxlidkfg52dc1wsyo5c0fvor1e8go3ptqwpr&rid=giphy.gif&ct=g
+    text: That's awesome!
+  - image: https://media1.giphy.com/media/2tOqM1jLQCA6J7uKRv/giphy.gif?cid=ecf05e47jtpas4vkintxzerfoj3rh3z5xxiyfbd37e3rj7cy&rid=giphy.gif&ct=g
+    text: Great!
+  - image: https://media1.giphy.com/media/3o7aCV47g59I2Xwiw8/giphy.gif?cid=ecf05e47uqc81bfxdt6idbax1m150sh5i58nc5rb5xg7fghr&rid=giphy.gif&ct=g
+    text: Glad to hear that!
   utter_goodbye:
   - text: Bye
   utter_iamabot:
-  - text: I am a bot, powered by Rasa.
+  - text: I am a bot. Like you, I am a student who is constantly learning. So sorry if I acted like a troller. P.S. I don't how to lie
+
 actions:
 - action_resolve_equation
+- action_play_rps
 - validate_math_form
-- utter_ask_for_equation
-- utter_background
-- utter_deny_response
-- utter_followup
-- utter_greet
-- utter_help_seeking_start
-- utter_math_ability
+
 forms:
   math_form:
     required_slots:

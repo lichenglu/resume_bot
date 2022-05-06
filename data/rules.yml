@@ -1,4 +1,4 @@
-version: "3.0"
+version: "3.1"
 
 rules:
   - rule: Say goodbye anytime the user says goodbye
@@ -17,7 +17,23 @@ rules:
       - action: utter_background
       - action: utter_math_ability
 
-  - rule: Handle Denial
+  - rule: Handle denial
     steps:
       - intent: deny
       - action: utter_deny_response
+
+  - rule: Handle gratitude
+    steps:
+      - intent: gratitude
+      - action: utter_no_problem
+
+  - rule: Handle bad mood
+    steps:
+      - intent: mood_unhappy
+      - action: utter_cheer_up
+      - action: utter_rps
+
+  - rule: Handle good mood
+    steps:
+      - intent: mood_great
+      - action: utter_happy

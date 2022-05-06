@@ -1,4 +1,4 @@
-version: "3.0"
+version: "3.1"
 
 stories:
 
@@ -10,6 +10,22 @@ stories:
   - action: utter_followup
 
 
+- story: Caring
+  steps:
+  - intent: greet
+  - action: utter_caring
+
+
+- story: Start rock, paper, scissors
+  steps:
+  - intent: play_rps
+  - action: utter_rps
+  - intent: inform_rps_choice
+  - slot_was_set:
+    - requested_slot: rps_choice
+  - action: action_play_rps
+
+
 - story: Start help seeking procedure
   steps:
   - intent: help_seeking
@@ -19,7 +35,6 @@ stories:
 - story: Seek help to solve/simplify an equation
   steps:
   - intent: help_seeking_problem_solving
-  - action: utter_ask_for_equation
   - action: math_form
   - active_loop: math_form
   - slot_was_set: 
@@ -29,92 +44,7 @@ stories:
   - active_loop: null
 
 
-- story: Seek help to solve an equation
+- story: Ask for recommendation
   steps:
   - intent: help_seeking_recommendation
   - action: utter_ask_for_topic
-- story: interactive_story_1
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: self_introduction
-    entities:
-    - name: Chenglu
-  - slot_was_set:
-    - name: Chenglu
-  - slot_was_set:
-    - equation: My name is Chenglu
-  - action: utter_followup
-  - intent: background
-  - slot_was_set:
-    - equation: What is your research interest?
-  - action: utter_background
-  - action: utter_math_ability
-  - intent: help_seeking
-  - slot_was_set:
-    - equation: /help_seeking
-  - action: utter_help_seeking_start
-  - intent: help_seeking_problem_solving
-    entities:
-    - help_seeking_mode: solve
-  - slot_was_set:
-    - equation: '/help_seeking_problem_solving{"help_seeking_mode": "solve"}'
-  - slot_was_set:
-    - help_seeking_mode: solve
-  - action: utter_ask_for_equation
-  - action: utter_ask_for_equation
-  - action: math_form
-  - active_loop: math_form
-  - slot_was_set:
-    - requested_slot: null
-  - active_loop: null
-  - intent: help_seeking_problem_solving
-    entities:
-    - equation: 1x+2=3
-  - slot_was_set:
-    - equation: 1x+2=3
-  - action: action_resolve_equation
-
-- story: interactive_story_1
-  steps:
-  - intent: greet
-  - slot_was_set:
-    - equation: hi
-  - action: utter_greet
-  - intent: self_introduction
-    entities:
-    - name: chenglu
-  - slot_was_set:
-    - name: chenglu
-  - slot_was_set:
-    - equation: I am chenglu!
-  - action: utter_followup
-  - intent: background
-  - slot_was_set:
-    - equation: Where have you studied?
-  - action: utter_background
-  - action: utter_math_ability
-  - intent: deny
-  - slot_was_set:
-    - equation: /deny
-  - action: utter_deny_response
-  - intent: help_seeking
-  - slot_was_set:
-    - equation: helppppppp!
-  - action: utter_help_seeking_start
-  - intent: help_seeking_problem_solving
-    entities:
-    - help_seeking_mode: simplify
-  - slot_was_set:
-    - equation: '/help_seeking_problem_solving{"help_seeking_mode": "simplify"}'
-  - slot_was_set:
-    - help_seeking_mode: simplify
-  - action: utter_ask_for_equation
-  - action: math_form
-  - active_loop: math_form
-  - slot_was_set:
-    - requested_slot: equation
-  - active_loop: null
-    entities:
-    - equation: 5x+2*4=1
-  - action: action_resolve_equation

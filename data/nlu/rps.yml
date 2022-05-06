@@ -1,0 +1,28 @@
+version: "3.1"
+
+nlu:
+- intent: play_rps
+  examples: |
+    - can we play rock, paper, scissors?
+    - let's game!
+    - game on!
+    - entertain me!
+    - this is boring
+    - i am bored
+    - gosh...so boring
+- intent: inform_rps_choice
+  examples: |
+    - [rock]{"entity": "rps_choice", "value": "rock"}
+    - [rock]{"entity": "rps_choice", "value": "rock"}
+    - [roc]{"entity": "rps_choice", "value": "rock"}
+    - [rok]{"entity": "rps_choice", "value": "rock"}
+    - [rockkkk]{"entity": "rps_choice", "value": "rock"}
+    - [paper]{"entity": "rps_choice", "value": "paper"}
+    - [paer]{"entity": "rps_choice", "value": "paper"}
+    - [paperrr]{"entity": "rps_choice", "value": "paper"}
+    - [scissors]{"entity": "rps_choice", "value": "scissors"}
+    - [scissor]{"entity": "rps_choice", "value": "scissors"}
+    - [scissorssss]{"entity": "rps_choice", "value": "scissors"}
+    - [scissorrrr]{"entity": "rps_choice", "value": "scissors"}
+    - [sisor]{"entity": "rps_choice", "value": "scissors"}
+    - [scisor]{"entity": "rps_choice", "value": "scissors"}

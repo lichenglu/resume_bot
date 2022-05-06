@@ -4,3 +4,12 @@ rasa:
       enabled: true
     rasaWorker:
       enabled: true
+rasax:
+  tag: "1.1.0"
+eventService:
+  tag: "1.1.0"
+dbMigrationService:
+  tag: "1.1.0"
+app:
+  install: false
+  existingUrl: http://localhost:5055/webhook

@@ -1,0 +1,13 @@
+version: "3.1"
+
+nlu:
+  - intent: gratitude
+    examples: |
+      - thanks
+      - thank you!
+      - Appreciate it
+      - thank you very much
+      - Awesome!
+      - you save my day!
+      - you save me
+      - you saved my life
