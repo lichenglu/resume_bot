@@ -25,4 +25,7 @@ This might be needed when we cannot upload the model to rasa x
 
 ### How to get custom server runing with rasactil connect
 Follow this: https://github.com/RasaHQ/rasactl/issues/35#issuecomment-1115301599
+
+`ps -ef | grep "rasa.*\-p 5005"`
+
 The generated endpoint file was named as .endpoint.yaml under the PROJECY_DIRECTORY. Not under tmp anymore.

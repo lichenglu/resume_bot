@@ -14,6 +14,22 @@ stories:
   steps:
   - intent: greet
   - action: utter_caring
+  - intent: chitchat
+  - action: utter_chitchat
+  - action: utter_followup
+
+
+- story: Caring
+  steps:
+  - intent: greet
+  - action: utter_caring
+  - intent: chitchat
+  - action: utter_chitchat
+  - intent: chitchat
+  - action: utter_chitchat
+  - intent: chitchat
+  - action: utter_chitchat
+  - action: utter_followup
 
 
 - story: Start rock, paper, scissors
@@ -35,10 +51,11 @@ stories:
 - story: Seek help to solve/simplify an equation
   steps:
   - intent: help_seeking_problem_solving
+    entities:
+    - help_seeking_mode: solve
   - action: math_form
   - active_loop: math_form
   - slot_was_set: 
-    - requested_slot: help_seeking_mode
     - requested_slot: equation
   - action: action_resolve_equation
   - active_loop: null

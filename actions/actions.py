@@ -103,6 +103,7 @@ class ValidateMathForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate help seeking mode value."""
 
+        print(tracker.slots.get('help_seeking_mode'), slot_value)
         if slot_value.lower() in self.supported_mode():
             # validation succeeded, set the value of the "cuisine" slot to value
             return {"help_seeking_mode": slot_value}

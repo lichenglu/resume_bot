@@ -19,3 +19,5 @@ event_broker:
   password: password
   queues:
   - rasa_production_events
+action_endpoint:
+  url: "http://localhost:5055/webhook"

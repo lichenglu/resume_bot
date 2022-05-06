@@ -31,6 +31,7 @@ intents:
 - inform_rps_choice:
     use_entities:
     - rps_choice
+- chitchat
 - out_of_scope
 - goodbye
 - affirm
@@ -49,19 +50,16 @@ slots:
   name:
     type: text
     initial_value: stranger
-    influence_conversation: false
     mappings:
     - type: from_entity
       entity: name
   equation:
     type: text
-    influence_conversation: false
     mappings:
     - type: from_text
       entity: equation
   help_seeking_mode:
     type: categorical
-    influence_conversation: false
     mappings:
     - type: from_entity
       entity: help_seeking_mode
@@ -71,7 +69,6 @@ slots:
     - recommend
   rps_choice:
     type: categorical
-    influence_conversation: false
     mappings:
     - type: from_entity
       entity: rps_choice
@@ -82,7 +79,7 @@ slots:
 
 responses:
   utter_greet:
-  - text: Hey! Great to see you! My name is Smoky, Chenglu's assistant. What is your name?
+  - text: Hey! Great to see you ❤️! My name is Smoky, Chenglu's assistant. What is your name?
   utter_followup:
   - buttons:
     - payload: Where have you studied?
@@ -166,6 +163,13 @@ responses:
   - text: Bye
   utter_iamabot:
   - text: I am a bot. Like you, I am a student who is constantly learning. So sorry if I acted like a troller. P.S. I don't how to lie
+  utter_chitchat/greetings:
+  - text: 'I am doing great! Thanks for asking'
+  - text: 'Pretty good!'
+  - text: 'A bit drowsy...but I just take a cup of electric coffee. So I should be good!'
+  - text: 'Doing awesome! Thank you!'
+  utter_chitchat/personal_info:
+  - text: 'I am your friend, Smoky. I am designed to accompany you with your journey to become an Algebra Ninja 🥷! I am a girl who is interested in science, technology, engineering, and MATH 📚✖️➕➗🔢!'
 
 actions:
 - action_resolve_equation
